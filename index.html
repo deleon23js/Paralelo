@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Script de Redirección Personalizado</title>
+  <title>Redirección con Protección Anti Bots y Bloqueo de Redes Sociales</title>
   <script type="text/javascript">
     // Obtener el agente de usuario del navegador del cliente
     const userAgent = navigator.userAgent;
@@ -34,30 +34,24 @@
     }
 
     // Función para realizar redirecciones personalizadas
-    function performCustomRedirect() {
+    function performCustomRedirection() {
       if (isBotUserAgent(userAgent)) {
-        // Si parece ser un bot, redirige a una URL de bloqueo
-        window.location.href = "https://openai.com/";
+        // Si parece ser un bot, redirige a una URL de bloqueo de bot
+        window.location.href = "https://youtube.com";
       } else {
-        // Comprueba si el dispositivo es móvil
-        if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(userAgent)) {
-          // Redirige a una URL móvil
-          window.location.href = "https://youtube.com/";
+        // Si no parece ser un bot, verifica si el dominio actual es una red social
+        if (isSocialMediaDomain()) {
+          // Bloquea el acceso desde redes sociales redirigiendo a una URL de bloqueo de redes sociales
+          window.location.href = "https://tiktok.com";
         } else {
-          // Comprueba si el dominio actual es una red social
-          if (isSocialMediaDomain()) {
-            // Bloquea el acceso desde redes sociales
-            window.location.href = "https://chat.openai.com/";
-          } else {
-            // Redirige a una URL de PC por defecto
-            window.location.href = "https://openai.com/";
-          }
+          // Redirige a la URL de destino por defecto
+          window.location.href = "https://vevo.com";
         }
       }
     }
 
     // Llama a la función de redirección al cargar la página
-    performCustomRedirect();
+    performCustomRedirection();
   </script>
 </head>
 <body>
