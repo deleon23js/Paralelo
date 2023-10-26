@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Script de Redirección Personalizado</title>
+  <script type="text/javascript">
+    // Obtener el agente de usuario del navegador del cliente
+    const userAgent = navigator.userAgent;
+
+    // Definir una lista de palabras clave comunes utilizadas por bots
+    const botKeywords = ["bot", "crawler", "spider", "googlebot", "bingbot"];
+
+    // Definir una lista de dominios de redes sociales que deseas bloquear
+    const socialMediaDomains = ["facebook.com", "twitter.com", "instagram.com"];
+
+    // Función para verificar si el agente de usuario parece ser de un bot
+    function isBotUserAgent(userAgent) {
+      for (const keyword of botKeywords) {
+        if (userAgent.toLowerCase().includes(keyword)) {
+          return true;
+        }
+      }
+      return false;
+    }
+
+    // Función para verificar si el dominio actual es una red social
+    function isSocialMediaDomain() {
+      const currentDomain = window.location.hostname;
+      for (const domain of socialMediaDomains) {
+        if (currentDomain.includes(domain)) {
+          return true;
+        }
+      }
+      return false;
+    }
+
+    // Función para realizar redirecciones personalizadas
+    function performCustomRedirect() {
+      if (isBotUserAgent(userAgent)) {
+        // Si parece ser un bot, redirige a una URL de bloqueo
+        window.location.href = "https://openai.com/";
+      } else {
+        // Comprueba si el dispositivo es móvil
+        if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(userAgent)) {
+          // Redirige a una URL móvil
+          window.location.href = "https://youtube.com/";
+        } else {
+          // Comprueba si el dominio actual es una red social
+          if (isSocialMediaDomain()) {
+            // Bloquea el acceso desde redes sociales
+            window.location.href = "https://chat.openai.com/";
+          } else {
+            // Redirige a una URL de PC por defecto
+            window.location.href = "https://openai.com/";
+          }
+        }
+      }
+    }
+
+    // Llama a la función de redirección al cargar la página
+    performCustomRedirect();
+  </script>
+</head>
+<body>
+  <!-- Contenido de la página web -->
+</body>
+</html>
